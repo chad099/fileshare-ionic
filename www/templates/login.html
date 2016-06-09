@@ -1,0 +1,80 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Login</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeLogin()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content ng-hide="signUpForm">
+    <form ng-submit="doLogin()" name="loginF" novalidate>
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="text" ng-model="loginData.email" name="email" ng-required="true">
+          <span class="help-inline error" ng-show='loginF.email.$dirty && loginF.email.$invalid'>
+              Required.
+          </span>
+          <span class="help-inline error" ng-show="formErr.email.email">{{formErr.email.serverMessage}}</span>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" name="password" ng-model="loginData.password" ng-required="true">
+          <span class="help-inline error" ng-show='loginF.password.$dirty && loginF.password.$invalid'>
+              Required.
+          </span>
+          <span class="help-inline error" ng-show="formErr.password.password">{{formErr.password.serverMessage}}</span>
+        </label>
+        <div class="item">
+          <button class="button button-block button-positive" type="submit">Log in</button>
+          <button class="button button-block button-positive" ng-click="signUpFormStatus(true)" type="button">Sign up</button>
+        </div>
+      </div>
+    </form>
+  </ion-content>
+
+  <ion-content ng-show="signUpForm">
+    <form name="signupF" ng-submit="doSignup()" novalidate>
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Name</span>
+          <input type="text" name="name" ng-model="signupData.name" ng-required="true">
+          <span class="help-inline error" ng-show='signupF.name.$dirty && signupF.name.$invalid'>
+              Required.
+          </span>
+
+          <span class="help-inline error" ng-show="formErr.name.name">{{formErr.name.serverMessage}}</span>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="text" name="email" ng-model="signupData.email" ng-required="true">
+          <span class="help-inline error" ng-show='signupF.email.$dirty && signupF.email.$invalid'>
+              Required.
+          </span>
+          <span class="help-inline error" ng-show="formErr.email.email">{{formErr.email.serverMessage}}</span>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" name="password" ng-model="signupData.password" ng-required="true">
+          <span class="help-inline error" ng-show='signupF.password.$dirty && signupF.password.$invalid'>
+              Required.
+          </span>
+          <span class="help-inline error" ng-show="formErr.password.password">{{formErr.password.serverMessage}}</span>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Confirm Password</span>
+          <input type="password" name="confirm_password" ng-model="signupData.confirm_password" ng-required="true">
+          <span class="help-inline error" ng-show='signupF.confirm_password.$dirty && signupF.confirm_password.$invalid'>
+              Required.
+          </span>
+          <span class="help-inline error" ng-show="formErr.confirm_password.confirm_password">{{formErr.confirm_password.serverMessage}}</span>
+        </label>
+        <div class="item">
+          <button class="button button-block button-positive" ng-disabled="signupF.$invalid" type="submit">Sign up</button>
+          <button class="button button-block button-positive" ng-click="signUpFormStatus(false)">Log in</button>
+        </div>
+      </form>
+      </div>
+
+  </ion-content>
+
+</ion-modal-view>

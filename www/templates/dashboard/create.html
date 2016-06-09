@@ -1,0 +1,107 @@
+<ion-view view-title="Create Note">
+  <ion-content>
+    <h1>Create folder or files that can be shared later.</h1>
+    <div class="buttons">
+      <button class="button full primary" ng-click="openCreateFolderForm()">Create Folder</button>
+      <button class="button full primary" ng-click="openCreateFileForm()">Create File</button>
+    </div>
+
+<div class="input-form" ng-show="createFolderFormStatus">
+    <form ng-submit="createFolder()" name="createFolderForm" novalidate>
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Name</span>
+          <input type="text" ng-model="createfolderData.name" name="name" ng-required="true">
+          <span class="help-inline error" ng-show='createFolderForm.name.$dirty && createFolderForm.name.$invalid'>
+              Required.
+          </span>
+          <span class="help-inline error" ng-show="formErr.name.name">{{formErr.name.serverMessage}}</span>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Description</span>
+          <input type="text" ng-model="createfolderData.description" name="description" ng-required="true">
+          <span class="help-inline error" ng-show='createFolderForm.description.$dirty && createFolderForm.description.$invalid'>
+              Required.
+          </span>
+          <span class="help-inline error" ng-show="formErr.description.description">{{formErr.description.serverMessage}}</span>
+        </label>
+
+        <input type="hidden" ng-model="createfolderData.user_id"name="user_id">
+
+        <div class="item">
+          <button class="button button-block button-positive" type="submit">Create</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="input-form" ng-show="createFileFormStatus">
+      <form ng-submit="createFile()" name="createFileForm" novalidate>
+        <div class="list">
+          <label class = "item item-input item-select item-royal">
+            <div class = "input-label">
+               Select Folder
+            </div>
+            <select>
+              <option ng-model="createFileForm.folderID" value=""></option>
+               <option ng-repeat="folder in folders" ng-model="createFileForm.folderID" value="{{ folder.id }}">{{ folder.name }}</option>
+            </select>
+         </label>
+
+          <label class="item item-input">
+            <span class="input-label">Name</span>
+            <input type="text" ng-model="createfileData.name" name="name" ng-required="true">
+            <span class="help-inline error" ng-show='createFileForm.name.$dirty && createFileForm.name.$invalid'>
+                Required.
+            </span>
+            <span class="help-inline error" ng-show="formErr.name.name">{{formErr.name.serverMessage}}</span>
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Subject</span>
+            <input type="text" ng-model="createfileData.subject" name="subject" ng-required="true">
+            <span class="help-inline error" ng-show='createFileForm.subject.$dirty && createFileForm.subject.$invalid'>
+                Required.
+            </span>
+            <span class="help-inline error" ng-show="formErr.subject.subject">{{formErr.subject.serverMessage}}</span>
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Content</span>
+            <input type="text" ng-model="createfileData.content" name="content" ng-required="true">
+            <span class="help-inline error" ng-show='createFileForm.content.$dirty && createFileForm.content.$invalid'>
+                Required.
+            </span>
+            <span class="help-inline error" ng-show="formErr.content.content">{{formErr.content.serverMessage}}</span>
+          </label>
+
+          <li class="item item-toggle">
+             Set Private
+             <label class="toggle toggle-stable">
+                 <input type="checkbox" ng-change="showPasswordInput(createFileForm.is_private)" ng-model="createfileData.is_private" name="is_private">
+                 <div class="track">
+                     <div class="handle"></div>
+                 </div>
+             </label>
+         </li>
+
+         <label class="item item-input" ng-show="setFilePassword">
+           <span class="input-label">Set Password</span>
+           <input type="text" ng-model="createfileData.credential" name="credential" ng-required="true">
+           <span class="help-inline error" ng-show='createFileForm.credential.$dirty && createFileForm.credential.$invalid'>
+               Required.
+           </span>
+           <span class="help-inline error" ng-show="formErr.credential.credential">{{formErr.credential.serverMessage}}</span>
+         </label>
+
+          <input type="hidden" ng-model="createfileData.user_id"name="user_id">
+
+          <div class="item">
+            <button class="button button-block button-positive" type="submit">Create</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </ion-content>
+</ion-view>
